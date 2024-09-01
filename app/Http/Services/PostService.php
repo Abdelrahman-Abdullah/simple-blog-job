@@ -22,7 +22,7 @@ class PostService
     }
     public function update($request, $id)
     {
-       return Post::where('id',$id)->update($request->validated());
+       return Post::where('id', $id)->update($request->validated());
     }
 
     public function delete($post)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostStoreRequest;
+use App\Http\Requests\PostUpdateRequest;
 use App\Http\Resources\PostResource;
 use App\Http\Services\PostService;
 use App\Models\Post;
@@ -25,6 +26,11 @@ class PostController extends Controller
         if (!\request()->wantsJson()) {
             return view('post.index', compact('posts'));
         }
+
+        return response()->json([
+            'message' => 'Post created successfully',
+            'data' => PostResource::collection($posts)
+        ],201);
     }
 
     public function create(): Factory|View|Application
@@ -50,22 +56,28 @@ class PostController extends Controller
         if (!\request()->wantsJson()) {
             return view('post.show', compact('post'));
         }
+
+        return response()->json([
+            'message' => 'Post created successfully',
+            'data' => new PostResource($post)
+        ],201);
     }
 
     public function edit($id)
     {
         $post = $this->postService->find($id);
-        if (!\request()->wantsJson()) {
-            return view('post.edit', compact('post'));
-        }
+        return view('post.edit', compact('post'));
     }
 
-    public function update(PostStoreRequest $request, $id)
+    public function update(PostUpdateRequest $request, $id)
     {
          $this->postService->update($request, $id);
         if (!$request->wantsJson()) {
             return redirect()->route('post.show', $id);
         }
+        return response()->json([
+            'message' => 'Post Updated successfully',
+        ]);
     }
 
     public function destroy(Post $post)
@@ -74,5 +86,9 @@ class PostController extends Controller
         if (!\request()->wantsJson()) {
             return redirect()->route('dashboard');
         }
+
+        return response()->json([
+            'message' => 'Post deleted successfully',
+        ]);
     }
 }

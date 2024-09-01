@@ -12,10 +12,11 @@ Route::post('/user/login', [AuthSessionController::class,'login'])->name('login'
 
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/posts', [PostController::class, 'index'])->name('index');
     Route::post('/adding-post',[PostController::class, 'store'])->name('post.store');
     Route::get('/posts', [PostController::class, 'index'])->name('dashboard');
     Route::get('/posts/{id}', [PostController::class, 'show'])->name('post.show');
-    Route::patch('/posts/{id}', [PostController::class, 'update'])->name('post.update');
+    Route::post('/posts/{id}', [PostController::class, 'update'])->name('post.update');
     Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('post.destroy');
 
     Route::controller(CommentController::class)->group(function () {
