@@ -1,10 +1,15 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/adding-post',[PostController::class, 'create'])->name('post.create');
 });
 
 Route::get('/dashboard', function () {
