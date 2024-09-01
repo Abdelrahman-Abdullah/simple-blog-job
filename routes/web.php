@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -9,10 +10,16 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
+
     Route::get('/adding-post',[PostController::class, 'create'])->name('post.create');
     Route::post('/adding-post',[PostController::class, 'store'])->name('post.store');
     Route::get('/posts', [PostController::class, 'index'])->name('dashboard');
     Route::get('/posts/{id}', [PostController::class, 'show'])->name('post.show');
+
+    Route::controller(CommentController::class)->group(function () {
+        Route::get('/posts/{post}/comments/add','create')->name('comment.create');
+        Route::post('/posts/{post}/comments','store')->name('comment.store');
+    });
 });
 
 Route::middleware('auth')->group(function () {

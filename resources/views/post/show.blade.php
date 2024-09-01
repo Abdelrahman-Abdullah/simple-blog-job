@@ -11,7 +11,12 @@
                 <div class="p-6 text-gray-900">
                     <div class="container mx-auto">
                         <div class="grid grid-cols-12 sm:grid-cols-2 lg:grid-cols-12 gap-4">
-                            <h1 class="text-2xl font-semibold">POST</h1>
+                            <div class="flex justify-between">
+                             <h1 class="text-2xl font-semibold">POST</h1>
+                                <a href="{{ route('comment.create',$post->id) }}" class="block bg-blue-700 hover:bg-amber-600 font-bold py-2 px-4  rounded text-red-600 border border-blue-500">
+                                    Add Comment
+                                </a>
+                            </div>
 
                             <!-- Card 1 -->
                                 <div class="col-span-1 bg-white rounded-lg shadow-md p-4 flex flex-col h-full">
