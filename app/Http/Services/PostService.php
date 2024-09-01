@@ -9,7 +9,7 @@ class PostService
 {
     public function all(): Collection
     {
-        return Post::all();
+        return Post::orderBy('created_at', 'desc')->get();
     }
     public function storePost($request)
     {
