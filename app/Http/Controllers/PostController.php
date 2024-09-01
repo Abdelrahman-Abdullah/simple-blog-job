@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostStoreRequest;
+use App\Http\Resources\PostResource;
 use App\Http\Services\PostService;
 use App\Models\Post;
 use Illuminate\Contracts\View\Factory;
@@ -38,7 +39,7 @@ class PostController extends Controller
         }
         return response()->json([
             'message' => 'Post created successfully',
-            'data' => $posts
+            'data' => new PostResource($posts)
         ],201);
 
     }
