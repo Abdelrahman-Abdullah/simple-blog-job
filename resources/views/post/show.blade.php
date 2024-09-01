@@ -20,11 +20,29 @@
 
                             <!-- Card 1 -->
                                 <div class="col-span-1 bg-white rounded-lg shadow-md p-4 flex flex-col h-full">
-                                    <h2 class="font-bold text-lg mb-2 text-gray-800 truncate">{{ ucfirst($post->title) }}</h2>
-                                    <p class="text-gray-800 text-sm flex-grow mb-3 line-clamp-3">{{ $post->content }}</p>
-                                    <p class="text-xs text-gray-500">
-                                        Created: {{ $post->created_at->diffForHumans() }}
-                                    </p>
+                                    <div class="flex justify-between">
+                                        <div>
+                                            <h2 class="font-bold text-lg mb-2 text-gray-800 truncate">{{ ucfirst($post->title) }}</h2>
+                                            <p class="text-gray-800 text-sm flex-grow mb-3 line-clamp-3">{{ $post->content }}</p>
+                                            <p class="text-xs text-gray-500">
+                                                Created: {{ $post->created_at->diffForHumans() }}
+                                            </p>
+                                        </div>
+                                        @if($post->user_id == auth()->id())
+                                                <div>
+                                                    <a href="{{ route('post.edit', $post->id) }}" class="text-blue-600 hover:text-blue-800 font-semibold">
+                                                        Edit
+                                                    </a>
+                                                        <form method="POST" action="{{ route('post.destroy', $post->id) }}">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="text-red-600 hover:text-blue-800 font-semibold">
+                                                                Delete
+                                                            </button>
+                                                        </form>
+                                                </div>
+                                        @endif
+                                    </div>
                                 </div>
                         </div>
                         <div class="mt-6">

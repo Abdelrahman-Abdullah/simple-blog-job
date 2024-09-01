@@ -45,4 +45,20 @@ class PostController extends Controller
             return view('post.show', compact('post'));
         }
     }
+
+    public function edit($id)
+    {
+        $post = $this->postService->find($id);
+        if (!\request()->wantsJson()) {
+            return view('post.edit', compact('post'));
+        }
+    }
+
+    public function update(PostStoreRequest $request, $id)
+    {
+         $this->postService->update($request, $id);
+        if (!$request->wantsJson()) {
+            return redirect()->route('post.show', $id);
+        }
+    }
 }

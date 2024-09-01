@@ -20,4 +20,9 @@ class PostService
     {
         return Post::with('comments')->find($id);
     }
+    public function update($request, $id)
+    {
+       return Post::where('id',$id)->update($request->validated());
+    }
+
 }

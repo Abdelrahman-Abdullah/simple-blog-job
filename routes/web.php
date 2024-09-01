@@ -15,6 +15,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/adding-post',[PostController::class, 'store'])->name('post.store');
     Route::get('/posts', [PostController::class, 'index'])->name('dashboard');
     Route::get('/posts/{id}', [PostController::class, 'show'])->name('post.show');
+    Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('post.edit');
+    Route::patch('/posts/{id}', [PostController::class, 'update'])->name('post.update');
+    Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('post.destroy');
 
     Route::controller(CommentController::class)->group(function () {
         Route::get('/posts/{post}/comments/add','create')->name('comment.create');
