@@ -36,6 +36,10 @@ class PostController extends Controller
         if (!$request->wantsJson()) {
             return redirect()->route('dashboard');
         }
+        return response()->json([
+            'message' => 'Post created successfully',
+            'data' => $posts
+        ],201);
 
     }
 
