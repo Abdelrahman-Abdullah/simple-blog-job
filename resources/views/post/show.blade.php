@@ -40,12 +40,13 @@
                                     </div>
 
                                     @if($comment->user_id == auth()->id())
-                                        <form method="POST" action="">
+                                        <form method="POST" action="{{ route('comment.delete', $comment->id) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-red-600 hover:text-blue-800 font-semibold">
                                                 Delete
                                             </button>
+                                        </form>
                                     @endif
                                 </div>
                             @empty

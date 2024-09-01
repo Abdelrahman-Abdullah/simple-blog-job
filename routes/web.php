@@ -19,6 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(CommentController::class)->group(function () {
         Route::get('/posts/{post}/comments/add','create')->name('comment.create');
         Route::post('/posts/{post}/comments','store')->name('comment.store');
+        Route::delete('/comments/{comment}/delete','delete')->name('comment.delete');
     });
 });
 

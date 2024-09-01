@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentStoreRequest;
 use App\Http\Services\CommentService;
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -23,9 +24,17 @@ class CommentController extends Controller
 
     public function store(CommentStoreRequest $request, Post $post)
     {
-        $comment = $this->commentService->storeComment($request, $post);
+        $comment = $this->commentService->store($request, $post);
         if (!$request->wantsJson()) {
             return redirect()->route('post.show', $comment->post_id);
+        }
+    }
+
+    public function delete(Comment $comment)
+    {
+        $this->commentService->destroy($comment);
+        if (!request()->wantsJson()) {
+            return redirect()->back();
         }
     }
 }
