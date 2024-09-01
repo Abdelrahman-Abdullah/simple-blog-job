@@ -25,4 +25,9 @@ class PostService
        return Post::where('id',$id)->update($request->validated());
     }
 
+    public function delete($post)
+    {
+        return $post->delete();
+    }
+
 }

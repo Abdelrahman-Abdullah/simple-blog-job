@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostStoreRequest;
 use App\Http\Services\PostService;
+use App\Models\Post;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -59,6 +60,14 @@ class PostController extends Controller
          $this->postService->update($request, $id);
         if (!$request->wantsJson()) {
             return redirect()->route('post.show', $id);
+        }
+    }
+
+    public function destroy(Post $post)
+    {
+        $this->postService->delete($post);
+        if (!\request()->wantsJson()) {
+            return redirect()->route('dashboard');
         }
     }
 }
