@@ -16,6 +16,15 @@ class PostController extends Controller
     {
         $this->postService = $postService;
     }
+
+    public function index()
+    {
+        $posts = $this->postService->all();
+        if (!\request()->wantsJson()) {
+            return view('post.index', compact('posts'));
+        }
+    }
+
     public function create(): Factory|View|Application
     {
         return view('post.create');

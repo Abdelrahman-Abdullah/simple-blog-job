@@ -11,11 +11,8 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/adding-post',[PostController::class, 'create'])->name('post.create');
     Route::post('/adding-post',[PostController::class, 'store'])->name('post.store');
+    Route::get('/posts', [PostController::class, 'index'])->name('dashboard');
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
