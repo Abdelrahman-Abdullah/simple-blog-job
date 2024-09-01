@@ -10,6 +10,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/adding-post',[PostController::class, 'create'])->name('post.create');
+    Route::post('/adding-post',[PostController::class, 'store'])->name('post.store');
 });
 
 Route::get('/dashboard', function () {

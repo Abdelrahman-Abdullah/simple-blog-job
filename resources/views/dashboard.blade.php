@@ -16,7 +16,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-2">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h1 class="text-2xl font-semibold mb-4">Latest Posts</h1>
+                    <div class="flex justify-between items-center mb-4">
+                        <h1 class="text-2xl font-semibold">Latest Posts</h1>
+                        <a href="{{ route('post.create') }}" class="block bg-blue-700 hover:bg-amber-600 font-bold py-2 px-4  rounded text-red-600 border border-blue-500">
+                            +
+                        </a>
+
+                    </div>
                     <div class="container mx-auto">
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                             <!-- Card 1 -->
