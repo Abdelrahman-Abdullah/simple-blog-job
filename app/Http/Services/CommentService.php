@@ -11,6 +11,7 @@ class CommentService
 
     public function destroy($comment)
     {
+
         return $comment->delete();
     }
 }

@@ -69,11 +69,16 @@ class PostController extends Controller
         return view('post.edit', compact('post'));
     }
 
-    public function update(PostUpdateRequest $request, $id)
+    public function update(PostUpdateRequest $request, Post $post)
     {
-         $this->postService->update($request, $id);
+        if (auth()->id() != $post->user_id) {
+            return response()->json([
+                'message' => 'You are not authorized to update this post',
+            ], 403);
+        }
+         $this->postService->update($request, $post);
         if (!$request->wantsJson()) {
-            return redirect()->route('post.show', $id);
+            return redirect()->route('post.show', $post);
         }
         return response()->json([
             'message' => 'Post Updated successfully',
@@ -82,6 +87,12 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
+        if (auth()->id() != $post->user_id) {
+            return response()->json([
+                'message' => 'You are not authorized to delete this post',
+            ], 403);
+        }
+
         $this->postService->delete($post);
         if (!\request()->wantsJson()) {
             return redirect()->route('dashboard');

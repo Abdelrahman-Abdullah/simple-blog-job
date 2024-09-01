@@ -28,13 +28,26 @@ class CommentController extends Controller
         if (!$request->wantsJson()) {
             return redirect()->route('post.show', $comment->post_id);
         }
+
+        return response()->json([
+            'message' => 'Comment created successfully',
+        ], 201);
     }
 
     public function delete(Comment $comment)
     {
+        if (auth()->id() != $comment->user_id) {
+            return response()->json([
+                'message' => 'You are not authorized to delete this comment',
+            ], 403);
+        }
+
         $this->commentService->destroy($comment);
         if (!request()->wantsJson()) {
             return redirect()->back();
         }
+        return response()->json([
+            'message' => 'Comment deleted successfully',
+        ], 200);
     }
 }
