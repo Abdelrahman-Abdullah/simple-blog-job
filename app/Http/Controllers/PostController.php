@@ -37,4 +37,12 @@ class PostController extends Controller
         }
 
     }
+
+    public function show($id)
+    {
+        $post = $this->postService->find($id);
+        if (!\request()->wantsJson()) {
+            return view('post.show', compact('post'));
+        }
+    }
 }

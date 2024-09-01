@@ -34,7 +34,7 @@
                                         Created: {{ $post->created_at->diffForHumans() }}
                                     </p>
                                     <div class="mt-6 text-right">
-                                        <a href="" class="text-red-600 hover:text-blue-800 font-semibold">
+                                        <a href="{{ route('post.show', $post->id) }}" class="text-red-600 hover:text-blue-800 font-semibold">
                                             View Post ➡️
                                         </a>
                                     </div>

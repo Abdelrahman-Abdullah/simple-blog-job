@@ -15,4 +15,9 @@ class PostService
     {
         return Post::create(array_merge($request->validated(), ['user_id' => auth()->id()] ));
     }
+
+    public function find($id): Post
+    {
+        return Post::with('comments')->find($id);
+    }
 }
